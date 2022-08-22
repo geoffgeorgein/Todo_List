@@ -234,16 +234,34 @@ app.post("/", function(req, res){
 app.post("/delete",(req,res)=>{
 
   const itemid=req.body.checkbox;
+  const title=req.body.listt;
 
-  Item.findByIdAndRemove(itemid,(err)=>{
-    if(err){
-      console.log("Error");
-    }
-    else{
-      console.log("item removed successfully");
-      res.redirect('/');
-    }
-  })
+  if(title=="Today"){
+
+    Item.findByIdAndRemove(itemid,(err)=>{
+      if(err){
+        console.log("Error");
+      }
+      else{
+        console.log("item removed successfully");
+        res.redirect('/');
+      }
+    })
+  }
+  else{
+    console.log(title);
+    console.log(itemid);
+
+      List.findOneAndUpdate({name:title},{ $pull: {items: {_id:itemid}}},(err,flist)=>{
+        if(!err){
+          console.log("Item removed ");
+          flist.save();
+          res.redirect('/'+title);
+        }
+      })
+  }
+
+ 
   // res.redirect('/');
   
 });
