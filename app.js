@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb://localhost:27017/Itemsdb',{useNewUrlParser:true});
+mongoose.connect('mongodb+srv://admin-geodd:test12345@cluster0.tvtqkbh.mongodb.net/Itemsdb',{useNewUrlParser:true});
 
 
 // const items = ["Buy Food", "Cook Food", "Eat Food"];
